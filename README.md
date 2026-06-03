@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![StayVerse Banner](https://res.cloudinary.com/dewhwjbdr/image/upload/v1780058821/airbnb-clone/listings/lmvy3sc2i359obim9zdq.jpg)
+![StayVerse Banner]()
 
 **Zamonaviy turar joy bron qilish platformasi**
 
@@ -239,14 +239,14 @@ Hissa qo'shish uchun:
 
 📧 Aloqa
 
-    Email: support@stayverse.uz
+    Email: otkurovdoston69@gmail.com
 
-    Telegram: @stayverse_bot
+    Telegram: https://t.me/DostonCoder
 
 <div align="center">
 
 ⭐️ Star qo'yishni unutmang!
 
 © 2024 StayVerse. Barcha huquqlar himoyalangan.
-</div> ```
+</div> 
 
