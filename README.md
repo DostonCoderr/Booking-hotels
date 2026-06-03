@@ -1,4 +1,4 @@
-# 🏠 StayVerse - Airbnb Clone
+# 🏠 StayVerse - Online Booking qilish Mehmonxona, Kvartira, Plyaj, Dacha.
 
 <div align="center">
 
