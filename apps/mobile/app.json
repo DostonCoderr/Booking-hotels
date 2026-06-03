@@ -1,0 +1,62 @@
+{
+  "expo": {
+    "name": "StayVerse",
+    "slug": "stay-verse",
+    "scheme": "stayverse",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FF385C"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Xaritada uylarni ko'rish uchun ruxsat bering."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Profil rasmi uchun galereya ruxsati kerak."
+        }
+      ],
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "merchant.com.airbnbclone",
+          "enableGooglePay": true
+        }
+      ],
+      "expo-video"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.yourname.airbnbclone",
+      "config": {
+        "googleMapsApiKey": "YOUR_IOS_GOOGLE_MAPS_KEY"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#FF385C"
+      },
+      "package": "com.yourname.airbnbclone",
+      "config": {
+        "googleMaps": {
+          "apiKey": "YOUR_ANDROID_GOOGLE_MAPS_KEY"
+        }
+      }
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
