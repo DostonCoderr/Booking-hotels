@@ -1,0 +1,153 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String          @id @default(cuid())
+  email            String          @unique
+  password         String?
+  name             String
+  avatar           String?
+  phone            String?
+  isHost           Boolean         @default(false)
+  isVerified       Boolean         @default(false)
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  stripeCustomerId String?
+  telegramChatId   String?
+  isActive         Boolean         @default(true)
+  role             String          @default("USER")
+  resetCode        String?
+  resetCodeExpiry  DateTime?
+  clerkId          String?         @unique(map: "users_clerkid_key")
+  notifications    Notification[]
+  paymentMethods   PaymentMethod[]
+  wishlist         Wishlist[]
+  bookings         Booking[]
+  listings         Listing[]
+  receivedMessages Message[]       @relation("receiver")
+  sentMessages     Message[]       @relation("sender")
+  reviews          Review[]
+
+  @@index([clerkId], map: "users_clerkid_idx")
+  @@map("users")
+}
+
+model Listing {
+  id           String     @id @default(cuid())
+  title        String
+  description  String
+  price        Float
+  category     String
+  type         String
+  address      String
+  city         String
+  country      String
+  latitude     Float
+  longitude    Float
+  maxGuests    Int
+  bedrooms     Int
+  beds         Int
+  bathrooms    Float
+  images       String[]
+  amenities    String[]
+  isActive     Boolean    @default(true)
+  hostId       String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  rejectReason String?
+  status       String     @default("PENDING")
+  wishlist     Wishlist[]
+  bookings     Booking[]
+  host         User       @relation(fields: [hostId], references: [id])
+  reviews      Review[]
+
+  @@map("listings")
+}
+
+model Booking {
+  id              String   @id @default(cuid())
+  checkIn         DateTime
+  checkOut        DateTime
+  guests          Int
+  totalPrice      Float
+  status          String   @default("pending")
+  stripePaymentId String?
+  listingId       String
+  guestId         String
+  createdAt       DateTime @default(now())
+  guest           User     @relation(fields: [guestId], references: [id])
+  listing         Listing  @relation(fields: [listingId], references: [id])
+
+  @@map("bookings")
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  rating    Int
+  comment   String
+  listingId String
+  authorId  String
+  createdAt DateTime @default(now())
+  author    User     @relation(fields: [authorId], references: [id])
+  listing   Listing  @relation(fields: [listingId], references: [id])
+
+  @@map("reviews")
+}
+
+model Message {
+  id         String   @id @default(cuid())
+  content    String
+  isRead     Boolean  @default(false)
+  senderId   String
+  receiverId String
+  createdAt  DateTime @default(now())
+  receiver   User     @relation("receiver", fields: [receiverId], references: [id])
+  sender     User     @relation("sender", fields: [senderId], references: [id])
+
+  @@map("messages")
+}
+
+model Wishlist {
+  id        String   @id @default(cuid())
+  userId    String
+  listingId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, listingId])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  message   String
+  type      String
+  data      Json?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PaymentMethod {
+  id                    String   @id @default(cuid())
+  userId                String
+  stripePaymentMethodId String   @unique
+  last4                 String
+  brand                 String
+  expiryMonth           Int
+  expiryYear            Int
+  isDefault             Boolean  @default(false)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

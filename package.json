@@ -1,0 +1,8 @@
+{
+  "name": "airbnb-clone",
+  "private": true,
+  "scripts": {
+    "backend": "cd apps/backend && npm run dev",
+    "mobile": "cd apps/mobile && npx expo start"
+  }
+}
