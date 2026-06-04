@@ -53,10 +53,21 @@
         "googleMaps": {
           "apiKey": "YOUR_ANDROID_GOOGLE_MAPS_KEY"
         }
-      }
+      },
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "bundler": "metro"
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "d7ea5e6d-278a-4e87-824d-1d1392a42123"
+      }
     }
   }
 }
