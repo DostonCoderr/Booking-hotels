@@ -6,21 +6,22 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      }
     },
     "preview": {
       "distribution": "internal",
       "android": {
         "buildType": "apk"
-      },
-      "installCommand": "npm install"
+      }
     },
     "production": {
       "autoIncrement": true,
       "android": {
         "buildType": "apk"
-      },
-      "installCommand": "npm install"
+      }
     }
   },
   "submit": {
